@@ -1,0 +1,3 @@
+[submodule "angular-ecommerce"]
+	path = angular-ecommerce
+	url = https://github.com/WodenWang820118/angular-ecommerce.git
