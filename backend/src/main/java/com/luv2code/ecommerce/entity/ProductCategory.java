@@ -15,8 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "product_category")
-// @Data -- known bug
+@Table(name = "product_category") // table name from MySQL
 @Getter
 @Setter
 
