@@ -14,11 +14,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name="prouct")
-@Data
+@Table(name="product") // table name from mySQL
+@Getter
+@Setter
 
 public class Product {
     @Id
