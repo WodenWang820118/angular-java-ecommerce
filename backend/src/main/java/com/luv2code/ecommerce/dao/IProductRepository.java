@@ -15,4 +15,6 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     // the findByCategoryId method is a custom method
     // that it executes SQL query behind the scenes
     Page<Product> findByCategoryId(@RequestParam("id") Long id, Pageable pageable);
+    // the method below is: SELECT * FROM product p WHERE p.name LIKE CONCAT('%', :name, '%')
+    Page<Product> findByNameContaining(@RequestParam("name") String name, Pageable pageable);
 }
