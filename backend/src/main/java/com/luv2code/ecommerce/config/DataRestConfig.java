@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -20,6 +21,8 @@ import com.luv2code.ecommerce.entity.ProductCategory;;
 @Configuration
 public class DataRestConfig implements RepositoryRestConfigurer {
 
+    @Value("${allowed.origins}")
+    private String[] allowedOrigins;
     private EntityManager entityManager;
     private List<Class> entityClasses;
 
@@ -31,8 +34,8 @@ public class DataRestConfig implements RepositoryRestConfigurer {
     
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-        HttpMethod[] theUnsupportedAction = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE};
-        // disable HTTP methods for Product: PUT, POST, DELETE
+        HttpMethod[] theUnsupportedAction = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH};
+        // disable HTTP methods for Product: PUT, POST, DELETE, PATCH
         config.getExposureConfiguration()
             .forDomainType(Product.class)
             .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedAction))
@@ -46,6 +49,9 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         
         // call an internal helper method
         exposeIds(config);
+
+        // configure CORS mapping
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedOrigins);
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {
