@@ -44,6 +44,14 @@ public class CheckoutService implements ICheckoutService {
 
         // populate customer with order
         Customer customer = purchase.getCustomer();
+
+        // check whether customer exists in the database
+        String email = customer.getEmail();
+        Customer customerFromDB = customerRepository.findByEmail(email);
+        if (customerFromDB != null) {
+            customer = customerFromDB;
+        }
+
         customer.add(order);
 
         // save to the database
