@@ -21,6 +21,8 @@ The project is a practice for familiarising myself with Git, submodule, and full
 To pull out a specific submodule branch for development:
 `git submodule foreach git pull origin <BRANCH>`
 
+Please see: [Front-end](https://github.com/WodenWang820118/angular-ecommerce) for front-end code.
+
 ## application.properties
 ```
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
