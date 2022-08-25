@@ -20,10 +20,10 @@ public class SecurityConfiguration {
         // TODO: for now, provide the false antPatterns to allow all requests
         http.authorizeRequests()
                 .antMatchers("api/orders/**")
-                .authenticated()
-                .and()
-                .oauth2ResourceServer()
-                .jwt();
+                .authenticated();
+                // .and()
+                // .oauth2ResourceServer()
+                // .jwt();
  
         // add CORS filters
         http.cors();
